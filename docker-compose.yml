@@ -3,13 +3,40 @@ services:
   zookeeper:
     restart: always
     image: wurstmeister/zookeeper
-  kafka:
+# cluster
+  kafka-1:
     restart: always
-    build: .
+    image: kafka-docker_kafka
     ports:
-      - "9092"
+        - "9092"
+    build: .
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 172.18.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_BROKER_ID: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-2:
+    restart: always
+    image: kafka-docker_kafka
+    ports:
+        - "9092"
+    build: .
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 172.18.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_BROKER_ID: 2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-3:
+    restart: always
+    image: kafka-docker_kafka
+    ports:
+        - "9092"
+    build: .
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 172.18.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_BROKER_ID: 3
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
