@@ -13,7 +13,7 @@ services:
         - "9092:9092"
     build: .
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 172.18.0.1
+      KAFKA_ADVERTISED_HOST_NAME: 172.18.0.2 # 这个 host 是用于集群外的 client 连接集群用的 host; 等同于让客户端来决定段域
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_BROKER_ID: 1
     volumes:
@@ -25,7 +25,7 @@ services:
         - "9093:9092"
     build: .
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 172.18.0.1
+      KAFKA_ADVERTISED_HOST_NAME: 172.18.0.2
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_BROKER_ID: 2
     volumes:
@@ -37,7 +37,7 @@ services:
         - "9094:9092"
     build: .
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 172.18.0.1
+      KAFKA_ADVERTISED_HOST_NAME: 172.18.0.2
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_BROKER_ID: 3
     volumes:
